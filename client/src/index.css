@@ -12,3 +12,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 10px;
+}
+
+table th,
+table td {
+  border: 1px solid #101010;
+  padding: 5px 10px 5px 10px;
+  text-align: center;
+}

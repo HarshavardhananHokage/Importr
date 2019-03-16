@@ -7,8 +7,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        Working!!!
+        <h1>Google Calendar Birthday List Importr</h1>
+        <h4>Upload Birthday List Excel (.xlsx or .xls) </h4>
         <UploadBox />
+        <br/>
+        <h4>List of Birthdays to be imported</h4>
         <ListDisplay />
       </div>
     );

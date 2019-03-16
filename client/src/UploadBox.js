@@ -9,7 +9,6 @@ function UploadBox (props) {
     }
 
     function handleUpload() {
-        console.log("FileName: " + props.file.name);
         let reader = new FileReader();
         reader.readAsBinaryString(props.file);
         reader.onload = (e) => {
