@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UploadBox from './UploadBox';
 import ListDisplay from './ListDisplay';
 import './App.css';
+import SyncWithGoogle from './SyncWithGoogle';
 
 class App extends Component {
   render() {
@@ -13,6 +14,8 @@ class App extends Component {
         <br/>
         <h4>List of Birthdays to be imported</h4>
         <ListDisplay />
+        <br/>
+        <SyncWithGoogle />
       </div>
     );
   }
