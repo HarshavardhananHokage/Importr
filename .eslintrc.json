@@ -2,6 +2,8 @@
     "extends": "standard",
     "rules": {
         "semi": ["error", "always"],
-        "indent": ["error", 4]
+        "indent": ["error", 4],
+        "quotes": "off",
+        "eol-last": "off"
     }
 }
