@@ -4,16 +4,17 @@ import * as gauth from './gauth';
 let router = express.Router();
 
 router.post('/google/sync', function (req, res) {
-    res.writeHead(400, { 'Content-Type': 'text/plain' });
-    console.log("Came here!!");
-    res.send("Works!!");
-    // res.status(500);
-    // res.send("None shall pass!");
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    // gauth.listEvents().catch((err) => console.log(err));
+    // console.log(req.body.birthdays);
+    gauth.insertEvent(req.body.birthdays);
+    res.end();
 });
 
 router.get('/google/auth', function (req, res) {
-    console.log(req.query.code);
-    res.end();
+    let code = req.query.code;
+    gauth.getAuthTokens(code);
+    res.redirect('http://localhost:3000?status=success');
 });
 
 router.get('/google/url', function (req, res) {

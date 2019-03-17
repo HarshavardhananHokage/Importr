@@ -17,7 +17,6 @@ export function getAuthenticateURL() {
     const GET_AUTH_URL = `${API_BASE}${PATH_GET_AUTH_URL}`;
     return axios.get(GET_AUTH_URL)
         .then((result) => { 
-            console.log("Came Here");
             return result.data
         })
         .catch(err => err.data);

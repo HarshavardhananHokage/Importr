@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as api from './api';
+import * as actions from './redux/action';
 
 class GoogleAuthenticator extends Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -14,28 +16,48 @@ class GoogleAuthenticator extends Component {
     }
 
     componentDidMount() {
-        api.getAuthenticateURL()
-        .then((data) => {
-            this.setState( {
-                url: data
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        let status = params.get('status');
+        if (status === "success") {
+            this.props.updateAuthentication();
+        }
+
+        if(!this.props.isAuthenticated) {
+            api.getAuthenticateURL()
+            .then((data) => {
+                this.setState({
+                    url: data
+                })
             })
-        })
-        .catch((err) => console.log(err));
-            
+            .catch((err) => console.log(err));
+        }
     }
 
-    handleAuth () {
-        window.open(this.state.url, "_blank");
+    handleAuth() {
+        window.location = this.state.url;
     }
-    
+
     render() {
         return (
             <div>
-                <button disabled={ this.state.url ? false : true} 
-                onClick={ this.handleAuth }>Authenticate</button>
+                <button disabled={this.props.isAuthenticated}
+                    onClick={this.handleAuth}>{this.props.isAuthenticated ? "Authenticated" : "Authenticate" }</button>
             </div>
         )
     }
 }
 
-export default GoogleAuthenticator;
+function mapStateToProps (state) {
+    return {
+        isAuthenticated: state.isAuthenticated
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+        updateAuthentication: () => dispatch( actions.authWithGoogle() )
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleAuthenticator);

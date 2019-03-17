@@ -18,6 +18,9 @@ function rootReducer (state = initialState, action) {
         case actions.SYNC_WITH_GOOGLE:
             let syncStatus = action.payload === "success" ? true: false;
             return Object.assign({}, state, { isUploadSuccess: syncStatus });
+        case actions.AUTH_WITH_GOOGLE:
+            let status = action.payload;
+            return Object.assign({}, state, { isAuthenticated: status });
         default:
             return state;
     }
